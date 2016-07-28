@@ -78,16 +78,18 @@ app.post('/api/account', function (req, res) {
     //   return unauthorized(res);
     // }
 
-  var user = req.body.username, pass = req.body.password;
+  var user = req.body.username, pass = req.body.password, loc = req.body.loc;
 
     var a = new api.Pokeio();
 
-    var location1 = {
-    type: 'name',
-    name:'Times Square'
+    var location = {
+    type: 'coords',
+    longitude: loc.longitude,
+    latitude: loc.latitude,
+    altitude: 0
 };
 
-    a.init(user, pass, location1, "google", function(err) {
+    a.init(user, pass, location, "google", function(err) {
     if (err) throw err;
 
     console.log('1[i] Current location: ' + a.playerInfo.locationName);
