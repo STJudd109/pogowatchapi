@@ -62,6 +62,11 @@ function unauthorized(res){
 //     res.send({"token": token});
 //   });
 // });
+
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
 app.enable('trust proxy');
 // app.set('trust proxy', 'loopback');
 
@@ -79,7 +84,7 @@ app.get('/api/account', function (req, res) {
     name:'Times Square'
 };
 
-    a.init(req.username, req.password, location1, "google", function(err) {
+    a.init(req.body.username, req.body.password, location1, "google", function(err) {
     if (err) throw err;
 
     console.log('1[i] Current location: ' + a.playerInfo.locationName);
