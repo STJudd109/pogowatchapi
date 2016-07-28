@@ -67,10 +67,10 @@ app.enable('trust proxy');
 
 
 app.get('/api/account', function (req, res) {
-    var user = basicAuth(req);
-    if(!user || !user.name || !user.pass){
-      return unauthorized(res);
-    }
+    // var user = basicAuth(req);
+    // if(!user || !user.name || !user.pass){
+    //   return unauthorized(res);
+    // }
 
     var a = new api.Pokeio();
 
@@ -79,7 +79,7 @@ app.get('/api/account', function (req, res) {
     name:'Times Square'
 };
 
-    a.init(user.name, user.pass, location1, "google", function(err) {
+    a.init(req.username, req.password, location1, "google", function(err) {
     if (err) throw err;
 
     console.log('1[i] Current location: ' + a.playerInfo.locationName);
