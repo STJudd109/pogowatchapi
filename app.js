@@ -84,8 +84,8 @@ app.post('/api/account', function (req, res) {
 
     var location = {
     type: 'coords',
-    longitude: loc.longitude,
-    latitude: loc.latitude,
+    longitude: Number(loc.longitude),
+    latitude: Number(loc.latitude),
     altitude: 0
 };
 
