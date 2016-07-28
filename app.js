@@ -63,6 +63,8 @@ function unauthorized(res){
 //   });
 // });
 
+app.set('trust proxy', 'loopback');
+
 
 app.get('/api/account', function (req, res) {
     var user = basicAuth(req);
@@ -90,7 +92,7 @@ app.get('/api/account', function (req, res) {
         console.log('1[i] Poke Storage: ' + profile.poke_storage);
         console.log('1[i] Item Storage: ' + profile.item_storage);
 
-        res.sendStatus(200,{ "username": profile.username, "storage": profile.poke_storage, "istorage": profile.item_storage, "stardust": profile.currency[1].amount, "pokecoins": profile.currency[0].amount});
+        res.send({ "username": profile.username, "storage": profile.poke_storage, "istorage": profile.item_storage, "stardust": profile.currency[1].amount, "pokecoins": profile.currency[0].amount});
 
         var poke = 0;
         if (profile.currency[0].amount) {
