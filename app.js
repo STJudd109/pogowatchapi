@@ -62,8 +62,8 @@ function unauthorized(res){
 //     res.send({"token": token});
 //   });
 // });
-
-app.set('trust proxy', 'loopback');
+app.enable('trust proxy');
+// app.set('trust proxy', 'loopback');
 
 
 app.get('/api/account', function (req, res) {
