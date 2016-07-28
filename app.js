@@ -89,6 +89,8 @@ app.post('/api/account', function (req, res) {
     altitude: 0
 };
 
+console.log(loc);
+
     a.init(user, pass, location, "google", function(err) {
     if (err) throw err;
 
