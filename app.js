@@ -16,7 +16,7 @@ app.all('*', function(req, res,next) {
      * Response settings
      * @type {Object}
      */
-    var responseSettings = {
+      var responseSettings = {
         "AccessControlAllowOrigin":'https://pogowatch.com';,
         "AccessControlAllowHeaders": "Content-Type,X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,  Date, X-Api-Version, X-File-Name",
         "AccessControlAllowMethods": "POST, GET, PUT, DELETE, OPTIONS",
@@ -31,6 +31,7 @@ app.all('*', function(req, res,next) {
     res.header("Access-Control-Allow-Headers", (req.headers['access-control-request-headers']) ? req.headers['access-control-request-headers'] : "x-requested-with");
     res.header("Access-Control-Allow-Methods", (req.headers['access-control-request-method']) ? req.headers['access-control-request-method'] : responseSettings.AccessControlAllowMethods);
 
+    
     if ('OPTIONS' == req.method) {
         res.send(200);
     }
@@ -43,6 +44,7 @@ app.all('*', function(req, res,next) {
 
 
 app.get('/', function (req, res, next) {
+ 
   res.sendfile(__dirname + '/public');
   next();
 });
@@ -112,6 +114,22 @@ app.post('/api/account', function (req, res) {
     // if(!users || !users.name || !users.pass){
     //   return unauthorized(res);
     // }
+
+    var responseSettings = {
+        "AccessControlAllowOrigin":'https://pogowatch.com';,
+        "AccessControlAllowHeaders": "Content-Type,X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,  Date, X-Api-Version, X-File-Name",
+        "AccessControlAllowMethods": "POST, GET, PUT, DELETE, OPTIONS",
+        "AccessControlAllowCredentials": true
+    };
+
+    /**
+     * Headers
+     */
+    res.header("Access-Control-Allow-Credentials", responseSettings.AccessControlAllowCredentials);
+    res.header("Access-Control-Allow-Origin",  responseSettings.AccessControlAllowOrigin);
+    res.header("Access-Control-Allow-Headers", (req.headers['access-control-request-headers']) ? req.headers['access-control-request-headers'] : "x-requested-with");
+    res.header("Access-Control-Allow-Methods", (req.headers['access-control-request-method']) ? req.headers['access-control-request-method'] : responseSettings.AccessControlAllowMethods);
+
 
 
   var user = req.body.username, pass = req.body.password, loc = req.body.loc, auth = req.body.auth;
