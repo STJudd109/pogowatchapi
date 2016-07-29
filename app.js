@@ -1,23 +1,19 @@
 var express = require('express'),
     requireNew = require('require-new'),
+    cors = require('cors'),
     app = express(),
     server = require('https').Server(app),
     bodyParser = require('body-parser'),
     basicAuth = require('basic-auth'),
      api = require('pokemon-go-node-api');
 server.listen(8080);
+app.use(cors());
 app.use(express.static(__dirname + '/public'));
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 
-
-
-app.get('/', function (req, res) {
+app.get('/', function (req, res, next) {
   res.sendfile(__dirname + '/public');
+  next();
 });
 
 
@@ -86,8 +82,6 @@ app.post('/api/account', function (req, res) {
     //   return unauthorized(res);
     // }
 
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
   var user = req.body.username, pass = req.body.password, loc = req.body.loc, auth = req.body.auth;
 
@@ -103,7 +97,6 @@ app.post('/api/account', function (req, res) {
 
 };
 
-console.log(loc);
 
     a.init(user, pass, location, auth, function(err) {
     if (err) throw err;
