@@ -2,14 +2,17 @@ var express = require('express'),
     requireNew = require('require-new'),
     cors = require('cors'),
     app = express(),
-    server = require('http').Server(app),
+    server = require('https').Server(app),
     bodyParser = require('body-parser'),
     basicAuth = require('basic-auth'),
      api = require('pokemon-go-node-api');
 server.listen(8080);
-// app.use(cors());
+app.use(cors());
 app.use(express.static(__dirname + '/public'));
-
+app.use(bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
 
 app.all('*', function(req, res,next) {
     /**
@@ -17,7 +20,7 @@ app.all('*', function(req, res,next) {
      * @type {Object}
      */
       var responseSettings = {
-        "AccessControlAllowOrigin":'https://pogowatch.com',
+        "AccessControlAllowOrigin":"*",
         "AccessControlAllowHeaders": "Content-Type,X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5,  Date, X-Api-Version, X-File-Name",
         "AccessControlAllowMethods": "POST, GET, PUT, DELETE, OPTIONS",
         "AccessControlAllowCredentials": true
@@ -100,10 +103,7 @@ app.get('/', function (req, res, next) {
 //   });
 // });
 
-app.use(bodyParser.json() );       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: true
-})); 
+
 
 // app.enable('trust proxy');
 // app.set('trust proxy', 'loopback');
