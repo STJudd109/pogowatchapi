@@ -1,7 +1,7 @@
 var express = require('express'),
     requireNew = require('require-new'),
     app = express(),
-    server = require('http').Server(app),
+    server = require('https').Server(app),
     bodyParser = require('body-parser'),
     basicAuth = require('basic-auth'),
      api = require('pokemon-go-node-api');
