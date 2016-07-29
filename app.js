@@ -22,10 +22,10 @@ app.get('/', function (req, res) {
 
 
 
-function unauthorized(res){
-  res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
-  return res.send(401);
-};
+// function unauthorized(res){
+//   res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
+//   return res.send(401);
+// };
 
 
 // app.get('/api/profile', function (req, res) {
@@ -81,10 +81,13 @@ app.enable('trust proxy');
 
 
 app.post('/api/account', function (req, res) {
-    var users = basicAuth(req);
-    if(!users || !users.name || !users.pass){
-      return unauthorized(res);
-    }
+    // var users = basicAuth(req);
+    // if(!users || !users.name || !users.pass){
+    //   return unauthorized(res);
+    // }
+
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 
   var user = req.body.username, pass = req.body.password, loc = req.body.loc, auth = req.body.auth;
 
