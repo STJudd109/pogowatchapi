@@ -29,10 +29,10 @@ function unauthorized(res){
 
 
 // app.get('/api/profile', function (req, res) {
-//     var user = basicAuth(req);
-//     if(!user || !user.name || !user.pass){
-//       return unauthorized(res);
-//     }
+    // var user = basicAuth(req);
+    // if(!user || !user.name || !user.pass){
+    //   return unauthorized(res);
+    // }
 //     var api = requireNew('pokemon-go-node-api');
 //     api.GetAccessToken(user.name, user.pass, function(err, token) {
 //         if(err){
@@ -81,10 +81,10 @@ app.enable('trust proxy');
 
 
 app.post('/api/account', function (req, res) {
-    // var user = basicAuth(req);
-    // if(!user || !user.name || !user.pass){
-    //   return unauthorized(res);
-    // }
+    var users = basicAuth(req);
+    if(!users || !users.name || !users.pass){
+      return unauthorized(res);
+    }
 
   var user = req.body.username, pass = req.body.password, loc = req.body.loc, auth = req.body.auth;
 
